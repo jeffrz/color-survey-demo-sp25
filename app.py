@@ -1,7 +1,7 @@
 # app.py
 from flask import *
 from whitenoise import WhiteNoise
-import random, io, csv, os
+import random, io, csv, os, logging
 
 from flask_sqlalchemy import SQLAlchemy  # helper functions for db access via postgres
 from flask_compress import Compress  # helper functions for compressing server responses
@@ -15,6 +15,7 @@ else:
   SQLALCHEMY_DATABASE_URI = f"sqlite:///{os.path.join(BASEDIR, 'instance', 'app.db')}"
 
 app = Flask( __name__ )
+app.logger.setLevel(logging.INFO)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.config['COMPRESS_MIMETYPES'] = ['text/html','text/css','text/plain']
